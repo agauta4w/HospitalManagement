@@ -28,8 +28,12 @@ public class PatientTest {
     @Test
     public void testTransactionMethod() {
         // This test will check if the application context loads successfully
-        Patient patient = patientService.getPatientById(1L);
-        System.out.println(patient);
+       //
+        // Patient patient = patientService.getPatientById(1L);
+
+
+        Patient patient1 = patientRepository.findByName("Pooja V");
+        System.out.println(patient1);
     }
 
 }

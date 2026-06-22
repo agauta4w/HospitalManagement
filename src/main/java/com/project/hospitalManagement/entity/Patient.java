@@ -1,5 +1,6 @@
 package com.project.hospitalManagement.entity;
 
+import com.project.hospitalManagement.type.BloodGroupType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ import java.time.LocalDate;
                 @UniqueConstraint(name = "email_unique", columnNames = "email")
         },
         indexes = {
-                @Index(name = "email_index", columnList = "email")
+                @Index(name = "idx_date_of_birth", columnList = "dateOfBirth")
 
         }
 )
@@ -29,7 +30,11 @@ public class Patient {
 
     private String name;
 
+    @ToString.Exclude
     private LocalDate dateOfBirth;
     private String email;
     private String gender;
+
+    @Enumerated(EnumType.STRING)
+    private BloodGroupType bloodGroup;
 }

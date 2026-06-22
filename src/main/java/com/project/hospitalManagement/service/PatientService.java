@@ -15,11 +15,13 @@ public class PatientService {
     private final PatientRepository patientRepository;
 
     @Transactional
-    public Patient getPatientById(Long id){
+    public Patient getPatientById(Long id) {
         Patient p1 = patientRepository.findById(id).orElseThrow();
-        Patient p2= patientRepository.findById(id).orElseThrow();
-        p1.setName("Bharat");
+        Patient p2 = patientRepository.findById(id).orElseThrow();
+        // p1.setName("Bharat");
 
         return p1;
     }
 }
+
+
