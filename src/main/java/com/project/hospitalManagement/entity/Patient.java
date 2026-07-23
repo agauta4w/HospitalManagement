@@ -37,4 +37,7 @@ public class Patient {
 
     @Enumerated(EnumType.STRING)
     private BloodGroupType bloodGroup;
+
+    @OneToOne
+    private Insurance insurance;
 }
