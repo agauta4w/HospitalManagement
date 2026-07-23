@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @ToString
@@ -38,6 +40,9 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private BloodGroupType bloodGroup;
 
-    @OneToOne
+    @OneToOne(mappedBy = "insurance")
     private Insurance insurance;
+
+    @OneToMany(mappedBy = "patient")
+    private Set<Appointment> appointmentSet = new HashSet<>();
 }
