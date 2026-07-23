@@ -1,5 +1,8 @@
 package com.project.hospitalManagement.repository;
 
+import com.project.hospitalManagement.dto.BloodGroupStats;
+import com.project.hospitalManagement.dto.CPatientInfo;
+import com.project.hospitalManagement.dto.IPatientInfo;
 import com.project.hospitalManagement.entity.Patient;
 import com.project.hospitalManagement.type.BloodGroupType;
 import jakarta.transaction.Transactional;
@@ -19,8 +22,20 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     Patient findByName(String name);
 
+    @Query("SELECT p.id as id, p.name as name, p.email as email FROM Patient p")
+    List<IPatientInfo> getAllPatientInfo();
 
+    @Query("SELECT new com.project.hospitalManagement.dto.CPatientInfo(p.id, p.name) FROM Patient p")
+    List<CPatientInfo> getAllCPatientInfo();
+
+    @Query("SELECT new com.project.hospitalManagement.dto.BloodGroupStats(p.bloodGroup, COUNT(p)) FROM Patient p GROUP BY p.bloodGroup")
+    List<BloodGroupStats> countPatientsByBloodGroup();
     //JPQL
+
+    @Query("UPDATE Patient p set p.name= :name where p.id= :id")
+    @Modifying
+    @Transactional
+    int updatePatientNameWithID(@Param("name") String name, @Param("id") Long id);
 
     @Query("SELECT p FROM Patient p WHERE p.bloodGroup = :bloodGroup")
     List<Patient> findByBloodGroup(BloodGroupType bloodGroup);

@@ -1,5 +1,8 @@
 package com.project.hospitalManagement;
 
+import com.project.hospitalManagement.dto.BloodGroupStats;
+import com.project.hospitalManagement.dto.CPatientInfo;
+import com.project.hospitalManagement.dto.IPatientInfo;
 import com.project.hospitalManagement.entity.Patient;
 import com.project.hospitalManagement.repository.PatientRepository;
 import com.project.hospitalManagement.service.PatientService;
@@ -46,10 +49,23 @@ public class PatientTest {
 //        System.out.println("Rows updated: " + rowUpdated);
 
         Page<Patient> patients = patientRepository.findAllPatient(PageRequest.of(0, 2));
+        List<IPatientInfo> patientList = patientRepository.getAllPatientInfo();
 
-        for(Patient patient : patients){
-            System.out.println(patient);
-        }
+//        for(IPatientInfo patient : patientList){
+//        }
+
+//        List<CPatientInfo> cPatientList = patientRepository.getAllCPatientInfo();
+//        for (CPatientInfo patient : cPatientList) {
+//            System.out.println(patient);
+//        }
+
+//        List<BloodGroupStats> bloodGroupStatsList = patientRepository.countPatientsByBloodGroup();
+//        for (BloodGroupStats stats : bloodGroupStatsList) {
+//            System.out.println(stats);
+//        }
+
+        int rowsAffected = patientRepository.updatePatientNameWithID("Sanju Samson", 1L);
+        System.out.println("Rows affected: " + rowsAffected);
 //        System.out.println("Total pages: " + patients.getTotalPages());
 //        System.out.println("Current page: " + patients.getNumber());
 
